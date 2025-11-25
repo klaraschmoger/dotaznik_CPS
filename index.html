@@ -330,14 +330,17 @@
 
     fetch(SCRIPT_URL, {
         method: "POST",
-        mode: "no-cors",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
     })
-    .then(() => {
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === "OK") {
         alert("Dotazník byl úspěšně odeslán. Děkujeme!");
         document.getElementById("surveyForm").reset();
-    })
+    } else {
+        alert("Chyba při odesílání: " + data.message);
+    }
     .catch(err => {
         alert("Chyba při odesílání. Kontaktujte prosím správce.");
         console.error(err);
@@ -350,4 +353,5 @@ function value(id){
   </script>
 </body>
 </html>
+
 
