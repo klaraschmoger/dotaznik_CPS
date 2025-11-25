@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dotazník – Poradenské subjekty</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .question { margin-top:20px; }
+    table { width:100%; border-collapse: collapse; margin-top:10px; }
+    th, td { border:1px solid #ccc; padding:6px; text-align:left; }
+    th { background:#f2f2f2; }
+    label { font-weight:bold; }
+    textarea { width:100%; height:80px; }
+    .hidden { display:none; }
+    .orgcol { display: none; }
+  </style>
+</head>
+<body>
+  <h1>Dotazník pro certifikované poradenské subjekty</h1>
+  <p>Text s nějakým úvodem…</p>
+
+  <form id="surveyForm">
+
+    <!-- 1) Výběr subjektu -->
+    <div class="question" id="q1">
+      <label>Vyberte název Vašeho poradenského subjektu:</label>
+      <select id="subjekt" onchange="setOrgPart()">
+        <option value="">-- Vyberte --</option>
+        <option value="Agdata s.r.o.|Poradenské centrum Agdata">Agdata s.r.o. (IČO: 05171750)</option>
+        <option value="Agro 2000 OPPZ s.r.o.|Agro 2000 OPPZ s.r.o.">Agro 2000 OPPZ s.r.o. (IČO: 29312612)</option>
+        <option value="AgroConsult Bohemia s.r.o.|AgroConsult Bohemia - ADVIGREEN">AgroConsult Bohemia s.r.o. (IČO: 04656245)</option>
+        <option value="AGROFERT, a.s.|AGF Poradenství v zemědělství">AGROFERT, a.s. (IČO: 26185610)</option>
+        <option value="Agroteam CZ s.r.o.|Agroteam CZ - ADVIGREEN">Agroteam CZ s.r.o. (IČO: 28110056)</option>
+        <option value="ARKMATEX spol. s r.o.|ARKMATEX spol. s r.o.">ARKMATEX spol. s r.o. (IČO: 62063341)</option>
+        <option value="AUTHORIA, s.r.o.|AUTHORIA - Poradenství ADVIGREEN">AUTHORIA, s.r.o. (IČO: 27728439)</option>
+        <option value="CleverFarm, a.s.|Poradenská služba společnosti CleverFarm a.s.">CleverFarm, a.s. (IČO: 05215480)</option>
+        <option value="Czech Organics, s.r.o.|Czech Organics, s.r.o.">Czech Organics, s.r.o. (IČO: 10690298)</option>
+        <option value="Hana Dastychová|Ing. Hana Dastychová - zemědělské poradenství">Hana Dastychová (IČO: 41305639)</option>
+        <option value="Ing. Roman Hrdina|Ing. Roman Hrdina">Ing. Roman Hrdina (IČO: 02574063)</option>
+        <option value="Komora zemědělských poradců České republiky, z.s.|KZP - poradenství ADVIGREEN">Komora zemědělských poradců České republiky, z.s. (IČO: 27050840)</option>
+        <option value="PRO PŘÍRODU A MYSLIVOST, z.s.|PRO PŘÍRODU A MYSLIVOST, z.s.">PRO PŘÍRODU A MYSLIVOST, z.s. (IČO: 26603497)</option>
+        <option value="RENVODIN-SAFARIK, spol. s r.o.|Poradenské centrum RENVODIN-ŠAFAŘÍK">RENVODIN-SAFARIK, spol. s r.o. (IČO: 26896982)</option>
+        <option value="Spolek pro inovace a udržitelné zemědělství, z.s.|Poradenský subjekt SIUZ">Spolek pro inovace a udržitelné zemědělství, z.s. (IČO: 09904140)</option>
+        <option value="SPZO, s.r.o.|SPZO ADVIGREEN">SPZO, s.r.o. (IČO: 26748410)</option>
+        <option value="Výzkumný ústav bramborářský Havlíčkův Brod, s.r.o.|Oddělení poradenství">Výzkumný ústav bramborářský Havlíčkův Brod, s.r.o. (IČO: 60109807)</option>
+      </select>
+      <p><i id="orgPart"></i></p>
+    </div>
+
+    <!-- 2) Rozřazovací dotaz -->
+    <div class="question hidden" id="q2">
+      <label>Liší se ve Vašem případě počet poradců působících v poradenském subjektu a v certifikované organizační části?</label>
+      <select id="rozdil" onchange="checkSection1()">
+        <option value="">-- Vyberte --</option>
+        <option value="ano">Ano</option>
+        <option value="ne">Ne</option>
+      </select>
+    </div>
+
+    <!-- I. Rozsah poradenství -->
+    <div class="hidden" id="cast1">
+      <h2>I. Rozsah poradenství</h2>
+      <table>
+        <tr>
+          <th>Otázka</th>
+          <th>Celkem za poradenský subjekt</th>
+          <th id="colOrgHeader">Z toho za certifikovanou organizační část</th>
+        </tr>
+        <tr>
+          <td>1. Kolik poradců poskytovalo poradenskou službu v roce 2024?</td>
+          <td><input type="number" id="p1"></td>
+          <td class="orgcol"><input type="number" id="p1_org"></td>
+        </tr>
+        <tr>
+          <td>2. Kolika farmám byla poskytnuta poradenská služba v roce 2024? (včetně krátkých či telefonických konzultací)</td>
+          <td><input type="number" id="p2"></td>
+          <td class="orgcol"><input type="number" id="p2_org"></td>
+        </tr>
+        <tr>
+          <td>3. Kolik hodin poradenské služby jste poskytli v roce 2024?</td>
+          <td><input type="number" id="p3"></td>
+          <td class="orgcol"><input type="number" id="p3_org"></td>
+        </tr>
+        <tr>
+          <td>3.a Z toho hodin konzultační poradenské služby?</td>
+          <td><input type="number" id="p4"></td>
+          <td class="orgcol"><input type="number" id="p4_org"></td>
+        </tr>
+        <tr>
+          <td>3.b Z toho hodin projektové poradenské služby?</td>
+          <td><input type="number" id="p5"></td>
+          <td class="orgcol"><input type="number" id="p5_org"></td>
+        </tr>
+        <tr>
+          <td>4. Kolik poradců spadá do následující věkové kategorie?</td>
+          <td>
+            <div>do 30 let <input type="number" id="age1"></div>
+            <div>31 až 40 let <input type="number" id="age2"></div>
+            <div>41 až 50 let <input type="number" id="age3"></div>
+            <div>51 až 60 let <input type="number" id="age4"></div>
+            <div>nad 60 let <input type="number" id="age5"></div>
+          </td>
+          <td class="orgcol">
+            <div>do 30 let <input type="number" id="age1_org"></div>
+            <div>31 až 40 let <input type="number" id="age2_org"></div>
+            <div>41 až 50 let <input type="number" id="age3_org"></div>
+            <div>51 až 60 let <input type="number" id="age4_org"></div>
+            <div>nad 60 let <input type="number" id="age5_org"></div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- II. Typ klienta / téma -->
+    <div class="hidden" id="cast2">
+      <h2>II. Typ konečného klienta / téma</h2>
+      <table>
+        <tr><th>Otázka</th><th>Celkem za poradenský subjekt</th><th class="orgcol">Z toho za certifikovanou organizační část</th></tr>
+        <tr>
+          <td>5. Z celkového počtu farem, kterým byla poskytnuta poradenská služba v roce 2024, byl počet:</td>
+          <td>
+            <div>zemědělců hospodařících na výměře max. 150 ha zemědělské půdy (dle LPIS) <input type="number" id="clien1"></div>
+            <div>zemědělců hospodařících na výměře od 151 do 300 ha zemědělské půdy (dle LPIS) <input type="number" id="clien2"></div>
+            <div>začínajících nebo mladých zemědělců <input type="number" id="clien3"></div>
+            <div>ekologicky hospodařících zemědělců <input type="number" id="clien4"></div>
+            <div>zemědělců hospodařících v živočišné výrobě <input type="number" id="clien5"></div>
+          </td>
+          <td class="orgcol">
+            <div>zemědělců hospodařících na výměře max. 150 ha zemědělské půdy (dle LPIS) <input type="number" id="clien1org"></div>
+            <div>zemědělců hospodařících na výměře od 151 do 300 ha zemědělské půdy (dle LPIS) <input type="number" id="clien2org"></div>
+            <div>začínajících nebo mladých zemědělců <input type="number" id="clien3org"></div>
+            <div>ekologicky hospodařících zemědělců <input type="number" id="clien4org"></div>
+            <div>zemědělců hospodařících v živočišné výrobě <input type="number" id="clien5org"></div>
+          </td>
+        </tr>
+        <tr>
+          <td>6. Z celkového počtu hodin poradenské služby, která byla poskytnuta v roce 2024, byl počet hodin:</td>
+          <td>
+            <div>zaměřených na využití precizního zemědělství a digitálních technologií <input type="number" id="foc1"></div>
+            <div>zaměřených na mitigaci nebo adaptaci na změnu klimatu <input type="number" id="foc2"></div>
+            <div>zaměřených na zpracování vlastních produktů, podporu místních trhů a krátkých dodavatelských řetězců <input type="number" id="foc3"></div>
+          </td>
+          <td class="orgcol">
+            <div>zaměřených na využití precizního zemědělství a digitálních technologií <input type="number" id="foc1org"></div>
+            <div>zaměřených na mitigaci nebo adaptaci na změnu klimatu <input type="number" id="foc2org"></div>
+            <div>zaměřených na zpracování vlastních produktů, podporu místních trhů a krátkých dodavatelských řetězců <input type="number" id="foc3org"></div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- III. Odbornost a aktivity -->
+    <div class="hidden" id="cast3">
+        <h2>III. Odbornost a aktivity</h2>
+        <p><i>Dotazy níže se týkají poradenského subjektu jako celku.</i></p>
+
+        <div class="question">
+            <label>7. Kolik poradců Vaší organizace se zúčastnilo v roce 2024 odborného vzdělávání?</label><br>
+            <input type="number" id="vz1">
+        </div>
+
+        <div class="question">
+            <label>8. Kolik hodin odborného vzdělávání celkem absolvovali Vaši poradci v roce 2024?</label><br>
+            <input type="number" id="vz2">
+        </div>
+
+        <div class="question">
+            <label>9. Jakých tematických oblastí se vzdělávání Vašich poradců týkalo? Uveďte, prosím, název školení nebo téma nebo odkaz:</label><br>
+            <textarea id="vz3"></textarea>
+        </div>
+
+        <div class="question">
+            <label>10. Uveďte, prosím, jaká témata v rámci odborného vzdělávání poradců byste uvítali (příprava školení pro poradce je jednou z činností ÚZEI):</label><br>
+            <textarea id="vz4"></textarea>
+        </div>
+
+        <table>
+            <tr>
+                <th>Otázka</th>
+                <th>Celkem za poradenský subjekt</th>
+            </tr>
+            <tr>
+                <td>11. Kolik z Vašich poradců bylo v roce 2024 zapojeno do inovačních nebo výzkumných aktivit jako:</td>
+                <td>
+                    <div>Operační skupiny EIP <input type="number" id="act1"></div>
+                    <div>Demonstrační farmy <input type="number" id="act2"></div>
+                    <div>Národní projekty (např. NAZV) <input type="number" id="act3"></div>
+                    <div>Mezinárodní projekty <input type="number" id="act4"></div>
+                    <div>Technologické platformy <input type="number" id="act5"></div>
+                    <div>Jiné (uveďte i s počtem) <input type="text" id="act6"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Závěr -->
+    <div class="hidden" id="q_final">
+      <h2>Závěr</h2>
+      <label>Vyplnil (uveďte jméno a příjmení):</label>
+      <input id="vyplnil" />
+
+      <label>Kontakt (uveďte e-mail):</label>
+      <input id="kontakt_email" type="email" />
+
+      <button type="button" onclick="finishSurvey()">Odeslat</button>
+    </div>
+
+  </form>
+
+  <script>
+    function setOrgPart(){
+      const val = document.getElementById('subjekt').value;
+      if(!val) return;
+      const parts = val.split('|');
+      document.getElementById('orgPart').innerText = 'Certifikovaná organizační část: ' + parts[1];
+      
+      // odkryj otázku č. 2
+      document.getElementById('q2').classList.remove('hidden');
+    }
+
+    function checkSection1(){
+      const rozdil = document.getElementById('rozdil').value;
+      if(!rozdil) return;
+      toggleSecondColumn();
+      // zobrazit celou sekci I
+      document.getElementById('cast1').classList.remove('hidden');
+      // skrytí dalších sekcí pro jistotu
+      document.getElementById('cast2').classList.add('hidden');
+      document.getElementById('cast3').classList.add('hidden');
+      document.getElementById('q_final').classList.add('hidden');
+    }
+
+    function toggleSecondColumn(){
+      const val = document.getElementById('rozdil').value;
+      const orgcols = document.querySelectorAll('.orgcol');
+      const header = document.getElementById('colOrgHeader');
+      if(val === 'ano'){
+        orgcols.forEach(c => c.style.display = 'table-cell');
+        header.style.display = 'table-cell';
+      } else {
+        orgcols.forEach(c => c.style.display = 'none');
+        header.style.display = 'none';
+      }
+    }
+
+    function checkSection2(){
+      const inputs = ['p1','p2','p3','p4','p5','age1','age2','age3','age4','age5'];
+      let allFilled = inputs.every(id => document.getElementById(id).value !== '');
+      if(allFilled){
+        document.getElementById('cast2').classList.remove('hidden');
+      }
+    }
+
+    function checkSection3(){
+      const inputs = ['clien1','clien2','clien3','clien4','clien5', 'foc1', 'foc2', 'foc3'];
+      let allFilled = inputs.every(id => document.getElementById(id).value !== '');
+      if(allFilled){
+        document.getElementById('cast3').classList.remove('hidden');
+      }
+    }
+
+    function checkFinal(){
+        // seznam všech polí v sekci III
+        const inputs = ['vz1','vz2','vz3','vz4','act1','act2','act3','act4','act5','act6'];
+        let allFilled = inputs.every(id => document.getElementById(id).value !== '');
+  
+        if(allFilled){
+            document.getElementById('q_final').classList.remove('hidden');
+        } else {
+            document.getElementById('q_final').classList.add('hidden'); // pokud někdo něco smaže
+        }
+    }
+
+    // přidáme event listenery pro automatické odkrývání dalších sekcí
+    document.addEventListener('input', function(e){
+      checkSection2();
+      checkSection3();
+      checkFinal();
+    });
+
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyEDl4T3AjdG_kN8gJ3NznfrnFip_KuSH36FaovOMuX08jusbwjSxbEsBS-Vp7e4t14SQ/exec";
+    function finishSurvey(){
+        const subjektRaw = document.getElementById("subjekt").value.split("|");
+        const subjekt = subjektRaw[0] || "";
+        const orgPart = subjektRaw[1] || "";
+
+    const payload = {
+        subjekt: subjekt,
+        orgPart: orgPart,
+        rozdil: document.getElementById("rozdil").value,
+
+        p1: value("p1"),        p1_org: value("p1_org"),
+        p2: value("p2"),        p2_org: value("p2_org"),
+        p3: value("p3"),        p3_org: value("p3_org"),
+        p4: value("p4"),        p4_org: value("p4_org"),
+        p5: value("p5"),        p5_org: value("p5_org"),
+
+        age1: value("age1"),    age1_org: value("age1_org"),
+        age2: value("age2"),    age2_org: value("age2_org"),
+        age3: value("age3"),    age3_org: value("age3_org"),
+        age4: value("age4"),    age4_org: value("age4_org"),
+        age5: value("age5"),    age5_org: value("age5_org"),
+
+        clien1: value("clien1"),    clien1org: value("clien1org"),
+        clien2: value("clien2"),    clien2org: value("clien2org"),
+        clien3: value("clien3"),    clien3org: value("clien3org"),
+        clien4: value("clien4"),    clien4org: value("clien4org"),
+        clien5: value("clien5"),    clien5org: value("clien5org"),
+
+        foc1: value("foc1"),    foc1org: value("foc1org"),
+        foc2: value("foc2"),    foc2org: value("foc2org"),
+        foc3: value("foc3"),    foc3org: value("foc3org"),
+
+        vz1: value("vz1"),
+        vz2: value("vz2"),
+        vz3: value("vz3"),
+        vz4: value("vz4"),
+
+        act1: value("act1"),
+        act2: value("act2"),
+        act3: value("act3"),
+        act4: value("act4"),
+        act5: value("act5"),
+        act6: value("act6"),
+
+        vyplnil: value("vyplnil"),
+        kontakt_email: value("kontakt_email")
+  };
+
+  fetch(SCRIPT_URL, {
+    method: "POST",
+    body: JSON.stringify(payload),
+    headers: { "Content-Type": "application/json" }
+  })
+  .then(r => r.json())
+  .then(result => {
+    alert("Dotazník byl úspěšně odeslán. Děkujeme!");
+    document.getElementById("surveyForm").reset();
+  })
+  .catch(err => {
+    alert("Chyba při odesílání. Kontaktujte prosím správce.");
+    console.error(err);
+  });
+}
+
+function value(id){
+  return document.getElementById(id) ? document.getElementById(id).value : "";
+}
+  </script>
+</body>
+</html>
