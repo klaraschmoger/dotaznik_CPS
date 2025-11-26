@@ -17,36 +17,49 @@
   </style>
 </head>
 <body>
-  <h1>Dotazník pro certifikované poradenské subjekty</h1>
-  <p>Text s nějakým úvodem…</p>
+<h1>Dotazník pro certifikované poradenské subjekty</h1>
+<p>Text s nějakým úvodem…</p>
 
-  <form id="surveyForm">
+<form id="surveyForm" method="POST" action="https://script.google.com/macros/s/AKfycbyEDl4T3AjdG_kN8gJ3NznfrnFip_KuSH36FaovOMuX08jusbwjSxbEsBS-Vp7e4t14SQ/exec" target="hidden_iframe">
+  <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="submitted=true"></iframe>
 
-    <!-- 1) Výběr subjektu -->
-    <div class="question" id="q1">
-      <label>Vyberte název Vašeho poradenského subjektu:</label>
-      <select id="subjekt" onchange="setOrgPart()">
-        <option value="">-- Vyberte --</option>
-        <option value="Agdata s.r.o.|Poradenské centrum Agdata">Agdata s.r.o. (IČO: 05171750)</option>
-        <option value="Agro 2000 OPPZ s.r.o.|Agro 2000 OPPZ s.r.o.">Agro 2000 OPPZ s.r.o. (IČO: 29312612)</option>
-        <option value="AgroConsult Bohemia s.r.o.|AgroConsult Bohemia - ADVIGREEN">AgroConsult Bohemia s.r.o. (IČO: 04656245)</option>
-        <option value="AGROFERT, a.s.|AGF Poradenství v zemědělství">AGROFERT, a.s. (IČO: 26185610)</option>
-        <option value="Agroteam CZ s.r.o.|Agroteam CZ - ADVIGREEN">Agroteam CZ s.r.o. (IČO: 28110056)</option>
-        <option value="ARKMATEX spol. s r.o.|ARKMATEX spol. s r.o.">ARKMATEX spol. s r.o. (IČO: 62063341)</option>
-        <option value="AUTHORIA, s.r.o.|AUTHORIA - Poradenství ADVIGREEN">AUTHORIA, s.r.o. (IČO: 27728439)</option>
-        <option value="CleverFarm, a.s.|Poradenská služba společnosti CleverFarm a.s.">CleverFarm, a.s. (IČO: 05215480)</option>
-        <option value="Czech Organics, s.r.o.|Czech Organics, s.r.o.">Czech Organics, s.r.o. (IČO: 10690298)</option>
-        <option value="Hana Dastychová|Ing. Hana Dastychová - zemědělské poradenství">Hana Dastychová (IČO: 41305639)</option>
-        <option value="Ing. Roman Hrdina|Ing. Roman Hrdina">Ing. Roman Hrdina (IČO: 02574063)</option>
-        <option value="Komora zemědělských poradců České republiky, z.s.|KZP - poradenství ADVIGREEN">Komora zemědělských poradců České republiky, z.s. (IČO: 27050840)</option>
-        <option value="PRO PŘÍRODU A MYSLIVOST, z.s.|PRO PŘÍRODU A MYSLIVOST, z.s.">PRO PŘÍRODU A MYSLIVOST, z.s. (IČO: 26603497)</option>
-        <option value="RENVODIN-SAFARIK, spol. s r.o.|Poradenské centrum RENVODIN-ŠAFAŘÍK">RENVODIN-SAFARIK, spol. s r.o. (IČO: 26896982)</option>
-        <option value="Spolek pro inovace a udržitelné zemědělství, z.s.|Poradenský subjekt SIUZ">Spolek pro inovace a udržitelné zemědělství, z.s. (IČO: 09904140)</option>
-        <option value="SPZO, s.r.o.|SPZO ADVIGREEN">SPZO, s.r.o. (IČO: 26748410)</option>
-        <option value="Výzkumný ústav bramborářský Havlíčkův Brod, s.r.o.|Oddělení poradenství">Výzkumný ústav bramborářský Havlíčkův Brod, s.r.o. (IČO: 60109807)</option>
-      </select>
-      <p><i id="orgPart"></i></p>
-    </div>
+  <!-- 1) Výběr subjektu -->
+  <div class="question" id="q1">
+    <label>Vyberte název Vašeho poradenského subjektu:</label>
+    <select name="subjekt_full" id="subjekt" onchange="setOrgPart()">
+      <option value="">-- Vyberte --</option>
+      <option value="Agdata s.r.o.|Poradenské centrum Agdata">Agdata s.r.o. (IČO: 05171750)</option>
+      <option value="Agro 2000 OPPZ s.r.o.|Agro 2000 OPPZ s.r.o.">Agro 2000 OPPZ s.r.o. (IČO: 29312612)</option>
+      <option value="AgroConsult Bohemia s.r.o.|AgroConsult Bohemia - ADVIGREEN">AgroConsult Bohemia s.r.o. (IČO: 04656245)</option>
+      <option value="AGROFERT, a.s.|AGF Poradenství v zemědělství">AGROFERT, a.s. (IČO: 26185610)</option>
+      <option value="Agroteam CZ s.r.o.|Agroteam CZ - ADVIGREEN">Agroteam CZ s.r.o. (IČO: 28110056)</option>
+      <option value="ARKMATEX spol. s r.o.|ARKMATEX spol. s r.o.">ARKMATEX spol. s r.o. (IČO: 62063341)</option>
+      <option value="AUTHORIA, s.r.o.|AUTHORIA - Poradenství ADVIGREEN">AUTHORIA, s.r.o. (IČO: 27728439)</option>
+      <option value="CleverFarm, a.s.|Poradenská služba společnosti CleverFarm a.s.">CleverFarm, a.s. (IČO: 05215480)</option>
+      <option value="Czech Organics, s.r.o.|Czech Organics, s.r.o.">Czech Organics, s.r.o. (IČO: 10690298)</option>
+      <option value="Hana Dastychová|Ing. Hana Dastychová - zemědělské poradenství">Hana Dastychová (IČO: 41305639)</option>
+      <option value="Ing. Roman Hrdina|Ing. Roman Hrdina">Ing. Roman Hrdina (IČO: 02574063)</option>
+      <option value="Komora zemědělských poradců České republiky, z.s.|KZP - poradenství ADVIGREEN">Komora zemědělských poradců České republiky, z.s. (IČO: 27050840)</option>
+      <option value="PRO PŘÍRODU A MYSLIVOST, z.s.|PRO PŘÍRODU A MYSLIVOST, z.s.">PRO PŘÍRODU A MYSLIVOST, z.s. (IČO: 26603497)</option>
+      <option value="RENVODIN-SAFARIK, spol. s r.o.|Poradenské centrum RENVODIN-ŠAFAŘÍK">RENVODIN-SAFARIK, spol. s r.o. (IČO: 26896982)</option>
+      <option value="Spolek pro inovace a udržitelné zemědělství, z.s.|Poradenský subjekt SIUZ">Spolek pro inovace a udržitelné zemědělství, z.s. (IČO: 09904140)</option>
+      <option value="SPZO, s.r.o.|SPZO ADVIGREEN">SPZO, s.r.o. (IČO: 26748410)</option>
+      <option value="Výzkumný ústav bramborářský Havlíčkův Brod, s.r.o.|Oddělení poradenství">Výzkumný ústav bramborářský Havlíčkův Brod, s.r.o. (IČO: 60109807)</option>
+    </select>
+    <input type="hidden" name="subjekt" id="subjekt_only">
+    <input type="hidden" name="orgPart" id="orgPart_input">
+    <p><i id="orgPart"></i></p>
+  </div>
+
+  <!-- 2) Rozřazovací dotaz -->
+  <div class="question hidden" id="q2">
+    <label>Liší se ve Vašem případě počet poradců působících v poradenském subjektu a v certifikované organizační části?</label>
+    <select name="rozdil" id="rozdil" onchange="checkSection1()">
+      <option value="">-- Vyberte --</option>
+      <option value="ano">Ano</option>
+      <option value="ne">Ne</option>
+    </select>
+  </div>
 
     <!-- 2) Rozřazovací dotaz -->
     <div class="question hidden" id="q2">
@@ -194,27 +207,27 @@
         </table>
     </div>
 
-    <!-- Závěr -->
-    <div class="hidden" id="q_final">
-      <h2>Závěr</h2>
-      <label>Vyplnil (uveďte jméno a příjmení):</label>
-      <input id="vyplnil" />
+   <!-- Závěr -->
+  <div class="hidden" id="q_final">
+    <h2>Závěr</h2>
+    <label>Vyplnil (uveďte jméno a příjmení):</label>
+    <input name="vyplnil" id="vyplnil" />
 
-      <label>Kontakt (uveďte e-mail):</label>
-      <input id="kontakt_email" type="email" />
+    <label>Kontakt (uveďte e-mail):</label>
+    <input name="kontakt_email" id="kontakt_email" type="email" />
 
-      <button type="button" onclick="finishSurvey()">Odeslat</button>
-    </div>
+    <button type="submit">Odeslat</button>
+  </div>
+</form>
 
-  </form>
-
-  <script>
-  function setOrgPart(){
+<script>
+function setOrgPart(){
   const val = document.getElementById('subjekt').value;
   if(!val) return;
   const parts = val.split('|');
   document.getElementById('orgPart').innerText = 'Certifikovaná organizační část: ' + parts[1];
-  
+  document.getElementById('subjekt_only').value = parts[0];
+  document.getElementById('orgPart_input').value = parts[1];
   document.getElementById('q2').classList.remove('hidden');
 }
 
@@ -265,80 +278,10 @@ function checkFinal(){
 }
 
 document.addEventListener('input', function(e){
-    // odkrývání sekce II
-    if (document.getElementById('cast1').classList.contains('hidden') === false) {
-        checkSection2();
-    }
-    // odkrývání sekce III
-    if (document.getElementById('cast2').classList.contains('hidden') === false) {
-        checkSection3();
-    }
-    // odkrývání závěru
-    if (document.getElementById('cast3').classList.contains('hidden') === false) {
-        checkFinal();
-    }
+    if (!document.getElementById('cast1').classList.contains('hidden')) checkSection2();
+    if (!document.getElementById('cast2').classList.contains('hidden')) checkSection3();
+    if (!document.getElementById('cast3').classList.contains('hidden')) checkFinal();
 });
-
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyEDl4T3AjdG_kN8gJ3NznfrnFip_KuSH36FaovOMuX08jusbwjSxbEsBS-Vp7e4t14SQ/exec"; // nahraď skutečnou URL
-function finishSurvey() {
-    const subjektRaw = document.getElementById("subjekt").value.split("|");
-    const subjekt = subjektRaw[0] || "";
-    const orgPart = subjektRaw[1] || "";
-
-    const payload = new URLSearchParams({
-        subjekt: subjekt,
-        orgPart: orgPart,
-        rozdil: value("rozdil"),
-        p1: value("p1"), p1_org: value("p1_org"),
-        p2: value("p2"), p2_org: value("p2_org"),
-        p3: value("p3"), p3_org: value("p3_org"),
-        p4: value("p4"), p4_org: value("p4_org"),
-        p5: value("p5"), p5_org: value("p5_org"),
-        age1: value("age1"), age1_org: value("age1_org"),
-        age2: value("age2"), age2_org: value("age2_org"),
-        age3: value("age3"), age3_org: value("age3_org"),
-        age4: value("age4"), age4_org: value("age4_org"),
-        age5: value("age5"), age5_org: value("age5_org"),
-        clien1: value("clien1"), clien1org: value("clien1org"),
-        clien2: value("clien2"), clien2org: value("clien2org"),
-        clien3: value("clien3"), clien3org: value("clien3org"),
-        clien4: value("clien4"), clien4org: value("clien4org"),
-        clien5: value("clien5"), clien5org: value("clien5org"),
-        foc1: value("foc1"), foc1org: value("foc1org"),
-        foc2: value("foc2"), foc2org: value("foc2org"),
-        foc3: value("foc3"), foc3org: value("foc3org"),
-        vz1: value("vz1"), vz2: value("vz2"), vz3: value("vz3"), vz4: value("vz4"),
-        act1: value("act1"), act2: value("act2"), act3: value("act3"), act4: value("act4"),
-        act5: value("act5"), act6: value("act6"),
-        vyplnil: value("vyplnil"), kontakt_email: value("kontakt_email")
-    });
-
-    fetch(SCRIPT_URL, {
-        method: "POST",
-        body: payload
-    })
-    .then(response => response.text())
-    .then(text => {
-        // Zobrazíme text odpovědi od Google Script
-        alert("Dotazník byl úspěšně odeslán. Odpověď serveru: " + text);
-        document.getElementById("surveyForm").reset();
-    })
-    .catch(err => {
-        alert("Chyba při odesílání. Kontaktujte správce.");
-        console.error(err);
-    });
-}
-
-function value(id){
-    return document.getElementById(id) ? document.getElementById(id).value : "";
-}
-
-  </script>
+</script>
 </body>
 </html>
-
-
-
-
-
-
