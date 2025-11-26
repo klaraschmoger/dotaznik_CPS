@@ -209,7 +209,7 @@
   </form>
 
   <script>
-    function setOrgPart(){
+  function setOrgPart(){
   const val = document.getElementById('subjekt').value;
   if(!val) return;
   const parts = val.split('|');
@@ -239,33 +239,47 @@ function toggleSecondColumn(){
 }
 
 function checkSection2(){
-  const inputs = ['p1','p2','p3','p4','p5','age1','age2','age3','age4','age5'];
-  if(inputs.every(id => document.getElementById(id).value !== '')){
-    document.getElementById('cast2').classList.remove('hidden');
+  function checkSection2(){
+    const inputs = ['p1','p2','p3','p4','p5','age1','age2','age3','age4','age5'];
+    let allFilled = inputs.every(id => document.getElementById(id).value !== '');
+    if(allFilled){
+        document.getElementById('cast2').classList.remove('hidden');
   }
 }
 
 function checkSection3(){
   const inputs = ['clien1','clien2','clien3','clien4','clien5', 'foc1', 'foc2', 'foc3'];
-  if(inputs.every(id => document.getElementById(id).value !== '')){
-    document.getElementById('cast3').classList.remove('hidden');
+    let allFilled = inputs.every(id => document.getElementById(id).value !== '');
+    if(allFilled){
+        document.getElementById('cast3').classList.remove('hidden');
   }
 }
 
 function checkFinal(){
   const inputs = ['vz1','vz2','vz3','vz4','act1','act2','act3','act4','act5','act6'];
-  if(inputs.every(id => document.getElementById(id).value !== '')){
-    document.getElementById('q_final').classList.remove('hidden');
-  } else {
-    document.getElementById('q_final').classList.add('hidden');
+    let allFilled = inputs.every(id => document.getElementById(id).value !== '');
+    if(allFilled){
+        document.getElementById('q_final').classList.remove('hidden');
+    } else {
+        document.getElementById('q_final').classList.add('hidden');
   }
 }
 
 document.addEventListener('input', function(e){
-  checkSection2();
-  checkSection3();
-  checkFinal();
+    // odkrývání sekce II
+    if (document.getElementById('cast1').classList.contains('hidden') === false) {
+        checkSection2();
+    }
+    // odkrývání sekce III
+    if (document.getElementById('cast2').classList.contains('hidden') === false) {
+        checkSection3();
+    }
+    // odkrývání závěru
+    if (document.getElementById('cast3').classList.contains('hidden') === false) {
+        checkFinal();
+    }
 });
+
 
 function finishSurvey(){
   const subjektRaw = document.getElementById("subjekt").value.split("|");
@@ -326,4 +340,5 @@ function value(id){
   </script>
 </body>
 </html>
+
 
