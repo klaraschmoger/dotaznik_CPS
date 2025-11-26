@@ -280,72 +280,63 @@ document.addEventListener('input', function(e){
 });
 
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyEDl4T3AjdG_kN8gJ3NznfrnFip_KuSH36FaovOMuX08jusbwjSxbEsBS-Vp7e4t14SQ/exec"; // nahraď skutečnou URL
-function finishSurvey(){
-  const subjektRaw = document.getElementById("subjekt").value.split("|");
-  const subjekt = subjektRaw[0] || "";
-  const orgPart = subjektRaw[1] || "";
+function finishSurvey() {
+    const subjektRaw = document.getElementById("subjekt").value.split("|");
+    const subjekt = subjektRaw[0] || "";
+    const orgPart = subjektRaw[1] || "";
 
-  const payload = {
-      subjekt: subjekt,
-      orgPart: orgPart,
-      rozdil: document.getElementById("rozdil").value,
-      p1: value("p1"), p1_org: value("p1_org"),
-      p2: value("p2"), p2_org: value("p2_org"),
-      p3: value("p3"), p3_org: value("p3_org"),
-      p4: value("p4"), p4_org: value("p4_org"),
-      p5: value("p5"), p5_org: value("p5_org"),
-      age1: value("age1"), age1_org: value("age1_org"),
-      age2: value("age2"), age2_org: value("age2_org"),
-      age3: value("age3"), age3_org: value("age3_org"),
-      age4: value("age4"), age4_org: value("age4_org"),
-      age5: value("age5"), age5_org: value("age5_org"),
-      clien1: value("clien1"), clien1org: value("clien1org"),
-      clien2: value("clien2"), clien2org: value("clien2org"),
-      clien3: value("clien3"), clien3org: value("clien3org"),
-      clien4: value("clien4"), clien4org: value("clien4org"),
-      clien5: value("clien5"), clien5org: value("clien5org"),
-      foc1: value("foc1"), foc1org: value("foc1org"),
-      foc2: value("foc2"), foc2org: value("foc2org"),
-      foc3: value("foc3"), foc3org: value("foc3org"),
-      vz1: value("vz1"), vz2: value("vz2"), vz3: value("vz3"), vz4: value("vz4"),
-      act1: value("act1"), act2: value("act2"), act3: value("act3"), act4: value("act4"),
-      act5: value("act5"), act6: value("act6"),
-      vyplnil: value("vyplnil"), kontakt_email: value("kontakt_email")
-  };
+    const payload = new URLSearchParams({
+        subjekt: subjekt,
+        orgPart: orgPart,
+        rozdil: value("rozdil"),
+        p1: value("p1"), p1_org: value("p1_org"),
+        p2: value("p2"), p2_org: value("p2_org"),
+        p3: value("p3"), p3_org: value("p3_org"),
+        p4: value("p4"), p4_org: value("p4_org"),
+        p5: value("p5"), p5_org: value("p5_org"),
+        age1: value("age1"), age1_org: value("age1_org"),
+        age2: value("age2"), age2_org: value("age2_org"),
+        age3: value("age3"), age3_org: value("age3_org"),
+        age4: value("age4"), age4_org: value("age4_org"),
+        age5: value("age5"), age5_org: value("age5_org"),
+        clien1: value("clien1"), clien1org: value("clien1org"),
+        clien2: value("clien2"), clien2org: value("clien2org"),
+        clien3: value("clien3"), clien3org: value("clien3org"),
+        clien4: value("clien4"), clien4org: value("clien4org"),
+        clien5: value("clien5"), clien5org: value("clien5org"),
+        foc1: value("foc1"), foc1org: value("foc1org"),
+        foc2: value("foc2"), foc2org: value("foc2org"),
+        foc3: value("foc3"), foc3org: value("foc3org"),
+        vz1: value("vz1"), vz2: value("vz2"), vz3: value("vz3"), vz4: value("vz4"),
+        act1: value("act1"), act2: value("act2"), act3: value("act3"), act4: value("act4"),
+        act5: value("act5"), act6: value("act6"),
+        vyplnil: value("vyplnil"), kontakt_email: value("kontakt_email")
+    });
 
-  fetch(SCRIPT_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
-})
-.then(response => response.text()) // místo .json()
-.then(text => {
-    try {
-        const data = JSON.parse(text);
-        if(data.status === "OK"){
-            alert("Dotazník byl úspěšně odeslán. Děkujeme!");
-            document.getElementById("surveyForm").reset();
-        } else {
-            alert("Chyba při odesílání: " + (data.message || text));
-        }
-    } catch(e){
-        alert("Chyba při odesílání, server nevrátil JSON: " + text);
-        console.error(e);
-    }
-})
-.catch(err => {
-    alert("Chyba při odesílání. Kontaktujte prosím správce.");
-    console.error(err);
-});
-
+    fetch(SCRIPT_URL, {
+        method: "POST",
+        body: payload
+    })
+    .then(response => response.text())
+    .then(text => {
+        // Zobrazíme text odpovědi od Google Script
+        alert("Dotazník byl úspěšně odeslán. Odpověď serveru: " + text);
+        document.getElementById("surveyForm").reset();
+    })
+    .catch(err => {
+        alert("Chyba při odesílání. Kontaktujte správce.");
+        console.error(err);
+    });
 }
 
 function value(id){
-  return document.getElementById(id) ? document.getElementById(id).value : "";
+    return document.getElementById(id) ? document.getElementById(id).value : "";
 }
+
   </script>
 </body>
 </html>
+
 
 
 
