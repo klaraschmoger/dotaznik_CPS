@@ -222,17 +222,12 @@
     function checkSection1(){
       const rozdil = document.getElementById('rozdil').value;
       if(!rozdil) return;
-    
       toggleSecondColumn();
-    
-      // odkryj sekci I okamžitě
+      // zobrazit celou sekci I
       document.getElementById('cast1').classList.remove('hidden');
-    
-      // nech sekci II a III skrytou, budou se odkrývat automaticky při vyplnění polí
+      // skrytí dalších sekcí pro jistotu
       document.getElementById('cast2').classList.add('hidden');
       document.getElementById('cast3').classList.add('hidden');
-    
-      // závěrečná sekce zůstane skrytá
       document.getElementById('q_final').classList.add('hidden');
     }
 
@@ -334,23 +329,22 @@
     };
 
     fetch(SCRIPT_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
     })
     .then(response => response.json())
     .then(data => {
-      if (data.status === "OK") {
+        if (data.status === "OK") {
         alert("Dotazník byl úspěšně odeslán. Děkujeme!");
         document.getElementById("surveyForm").reset();
-      } else {
+    } else {
         alert("Chyba při odesílání: " + data.message);
-      }
-  })
-.catch(err => {
-    alert("Chyba při odesílání. Kontaktujte prosím správce.");
-    console.error(err);
-});
+    }
+    .catch(err => {
+        alert("Chyba při odesílání. Kontaktujte prosím správce.");
+        console.error(err);
+    });
 }
 
 function value(id){
@@ -359,8 +353,3 @@ function value(id){
   </script>
 </body>
 </html>
-
-
-
-
-
