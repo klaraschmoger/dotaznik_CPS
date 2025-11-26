@@ -222,18 +222,17 @@
     function checkSection1(){
       const rozdil = document.getElementById('rozdil').value;
       if(!rozdil) return;
-
+    
       toggleSecondColumn();
-
-      // odkrýt sekci I hned
+    
+      // odkryj sekci I okamžitě
       document.getElementById('cast1').classList.remove('hidden');
-
-      // odkrýt sekci II a III postupně až po vyplnění předchozích otázek
-      // odstraníme závislost na úplném vyplnění všech polí
-      document.getElementById('cast2').classList.remove('hidden');
-      document.getElementById('cast3').classList.remove('hidden');
-
-      // závěrečná sekce zůstane skrytá, až uživatel vyplní sekci III
+    
+      // nech sekci II a III skrytou, budou se odkrývat automaticky při vyplnění polí
+      document.getElementById('cast2').classList.add('hidden');
+      document.getElementById('cast3').classList.add('hidden');
+    
+      // závěrečná sekce zůstane skrytá
       document.getElementById('q_final').classList.add('hidden');
     }
 
@@ -360,6 +359,7 @@ function value(id){
   </script>
 </body>
 </html>
+
 
 
 
