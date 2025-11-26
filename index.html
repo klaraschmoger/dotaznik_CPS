@@ -281,14 +281,14 @@
 
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyEDl4T3AjdG_kN8gJ3NznfrnFip_KuSH36FaovOMuX08jusbwjSxbEsBS-Vp7e4t14SQ/exec";
     function finishSurvey(){
-    const subjektRaw = document.getElementById("subjekt").value.split("|");
-    const subjekt = subjektRaw[0] || "";
-    const orgPart = subjektRaw[1] || "";
+        const subjektRaw = document.getElementById("subjekt").value.split("|");
+        const subjekt = subjektRaw[0] || "";
+        const orgPart = subjektRaw[1] || "";
 
     const payload = {
         subjekt: subjekt,
         orgPart: orgPart,
-        rozdil: value("rozdil"),
+        rozdil: document.getElementById("rozdil").value,
 
         p1: value("p1"),        p1_org: value("p1_org"),
         p2: value("p2"),        p2_org: value("p2_org"),
@@ -326,25 +326,22 @@
 
         vyplnil: value("vyplnil"),
         kontakt_email: value("kontakt_email")
-    };
+  };
 
-    fetch(SCRIPT_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === "OK") {
-        alert("Dotazník byl úspěšně odeslán. Děkujeme!");
-        document.getElementById("surveyForm").reset();
-    } else {
-        alert("Chyba při odesílání: " + data.message);
-    }
-    .catch(err => {
-        alert("Chyba při odesílání. Kontaktujte prosím správce.");
-        console.error(err);
-    });
+  fetch(SCRIPT_URL, {
+    method: "POST",
+    body: JSON.stringify(payload),
+    headers: { "Content-Type": "application/json" }
+  })
+  .then(r => r.json())
+  .then(result => {
+    alert("Dotazník byl úspěšně odeslán. Děkujeme!");
+    document.getElementById("surveyForm").reset();
+  })
+  .catch(err => {
+    alert("Chyba při odesílání. Kontaktujte prosím správce.");
+    console.error(err);
+  });
 }
 
 function value(id){
