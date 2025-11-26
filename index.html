@@ -224,7 +224,15 @@ function setOrgPart(){
   if(!val) return;
   const parts = val.split('|');
   document.getElementById('orgPart').innerText = 'Certifikovaná organizační část: ' + parts[1];
+
+  // odkrývání sekce s rozřazovacím dotazem
   document.getElementById('q2').classList.remove('hidden');
+
+  // pokud je už hodnota vybraná, odkrýváme první část ihned
+  if(document.getElementById('rozdil').value !== ''){
+      toggleSecondColumn();
+      document.getElementById('cast1').classList.remove('hidden');
+  }
 }
 
 function toggleSecondColumn(){
@@ -260,3 +268,4 @@ function submitSurvey(){
 </script>
 </body>
 </html>
+
