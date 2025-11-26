@@ -329,22 +329,23 @@
     };
 
     fetch(SCRIPT_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
     })
     .then(response => response.json())
     .then(data => {
-        if (data.status === "OK") {
+      if (data.status === "OK") {
         alert("Dotazník byl úspěšně odeslán. Děkujeme!");
         document.getElementById("surveyForm").reset();
     } else {
         alert("Chyba při odesílání: " + data.message);
     }
-    .catch(err => {
-        alert("Chyba při odesílání. Kontaktujte prosím správce.");
-        console.error(err);
-    });
+})
+.catch(err => {
+    alert("Chyba při odesílání. Kontaktujte prosím správce.");
+    console.error(err);
+});
 }
 
 function value(id){
@@ -353,4 +354,5 @@ function value(id){
   </script>
 </body>
 </html>
+
 
