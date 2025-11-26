@@ -239,7 +239,6 @@ function toggleSecondColumn(){
 }
 
 function checkSection2(){
-  function checkSection2(){
     const inputs = ['p1','p2','p3','p4','p5','age1','age2','age3','age4','age5'];
     let allFilled = inputs.every(id => document.getElementById(id).value !== '');
     if(allFilled){
@@ -280,7 +279,7 @@ document.addEventListener('input', function(e){
     }
 });
 
-
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyEDl4T3AjdG_kN8gJ3NznfrnFip_KuSH36FaovOMuX08jusbwjSxbEsBS-Vp7e4t14SQ/exec"; // nahraď skutečnou URL
 function finishSurvey(){
   const subjektRaw = document.getElementById("subjekt").value.split("|");
   const subjekt = subjektRaw[0] || "";
@@ -340,5 +339,6 @@ function value(id){
   </script>
 </body>
 </html>
+
 
 
