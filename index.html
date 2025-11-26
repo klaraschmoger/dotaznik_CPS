@@ -338,10 +338,10 @@
       if (data.status === "OK") {
         alert("Dotazník byl úspěšně odeslán. Děkujeme!");
         document.getElementById("surveyForm").reset();
-    } else {
+      } else {
         alert("Chyba při odesílání: " + data.message);
-    }
-})
+      }
+  })
 .catch(err => {
     alert("Chyba při odesílání. Kontaktujte prosím správce.");
     console.error(err);
@@ -354,5 +354,6 @@ function value(id){
   </script>
 </body>
 </html>
+
 
 
